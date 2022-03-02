@@ -5,14 +5,25 @@
   --redHover: rgba(254, 61, 32, 0.7);
   --h1FontSize: 96px;
   --white: #ffffff;
+  --borderColor: #525557;
+  --infoBg: #454545;
 }
 body {
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
 * {
   box-sizing: border-box;
+}
+#root {
+  height: 100%;
+  width: 100%;
+}
+.App {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
 }

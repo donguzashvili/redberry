@@ -1,0 +1,94 @@
+.questionsContent {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  height: 100%;
+  width: 100%;
+  .info {
+    background-color: var(--black);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .infoWrapper {
+      padding: 195px 180px 279px 122px;
+      h3 {
+        font-family: 'Rowdies';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 64px;
+        line-height: 79px;
+        align-items: center;
+        justify-content: center;
+        color: var(--red);
+      }
+      p {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 200%;
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.05em;
+      }
+    }
+  }
+  .form {
+    .inputComponentWrapper {
+      margin: 37px 0;
+      .validationError {
+        border: 1px solid var(--red) !important;
+      }
+      .showParagraphError {
+        opacity: 1 !important;
+      }
+      .inputComponent {
+        border: 1px solid var(--borderColor);
+        display: flex;
+        align-items: center;
+        width: 455px;
+        height: 54px;
+        input {
+          border: none;
+          font-family: 'montserrat';
+          font-style: italic;
+          font-size: 14px;
+          line-height: 17px;
+          outline: none;
+          width: 100%;
+          height: 100%;
+          padding: 0 0 0 57px;
+        }
+      }
+      p {
+        margin: 5px 0;
+        color: var(--red);
+        opacity: 0;
+        font-weight: bold;
+        font-family: 'montserrat';
+        display: flex;
+        justify-content: center;
+      }
+    }
+
+    .pagination {
+      display: flex;
+      align-items: center;
+      svg {
+        cursor: pointer;
+      }
+      span {
+        background-color: red;
+        padding: 10px;
+        margin: 0 15px;
+        border-radius: 50%;
+        opacity: 10%;
+        cursor: pointer;
+      }
+      .active {
+        opacity: 1;
+      }
+    }
+  }
+}

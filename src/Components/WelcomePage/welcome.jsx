@@ -1,36 +1,29 @@
-import React from "react";
-import { ReactComponent as RocketMan } from "../assets/images/rocketman.svg";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { ReactComponent as RocketMan } from '../assets/images/rocketman.svg';
+import { useNavigate } from 'react-router-dom';
 
-import "./welcome.css";
+import './welcome.css';
 
-export default class WelcomePage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+export default function WelcomePage(props) {
+  const navigate = useNavigate();
 
-  pushLink = (link) => {
-    const navigate = useNavigate();
-    navigate(`/${link}`);
+  const startQuestions = () => {
+    navigate('/questions/1');
+    // props.startQuestionnaire();
   };
 
-  render() {
-    return (
-      <div className="welcome">
-        <div className="welcomeWrapper">
-          <div className="welcomeContent">
-            <h1>Welcome Rocketeer !</h1>
+  return (
+    <div className="welcome">
+      <div className="welcomeWrapper">
+        <div className="welcomeContent">
+          <h1>Welcome Rocketeer !</h1>
 
-            <button>Start Questionnaire</button>
-            <a onClick={() => this.pushLink("submitedApps")}>
-              Submitted Applications
-            </a>
+          <button onClick={startQuestions}>Start Questionnaire</button>
+          <p onClick={props.previousApplications}>Submitted Applications</p>
 
-            <RocketMan />
-          </div>
+          <RocketMan />
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }

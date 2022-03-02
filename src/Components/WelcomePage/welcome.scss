@@ -27,8 +27,7 @@
 
       button {
         background-color: var(--red);
-        width: 395px;
-        height: 79px;
+        padding: 25px 80px;
         border-radius: 50px;
         border: none;
         margin: 0 auto 18px;
@@ -43,7 +42,7 @@
         }
       }
 
-      a {
+      p {
         display: flex;
         justify-content: center;
         font-family: "montserrat";
