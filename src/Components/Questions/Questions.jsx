@@ -7,7 +7,6 @@ import './Questions.css';
 export default function Questions(props) {
   const data = require('../assets/info/info.json');
   const { page } = useParams();
-  console.log(data[page]);
 
   return (
     <div className="questionsContent">

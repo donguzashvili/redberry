@@ -1,7 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Input(props) {
   const [error, setError] = useState(false);
+  useEffect(() => {
+    if (!props.validate) return;
+    const input = document.getElementsByName(`${props.name}`)[0].value;
+    validateInput(input);
+  }, [props.validate]);
 
   const validateInput = (value) => {
     switch (props.name) {
@@ -18,14 +23,16 @@ export default function Input(props) {
         handleError(true);
         break;
       default:
+        console.log('ak shemodis');
+        localStorage.setItem(props.name, value);
         return;
     }
   };
 
   const handleError = (bool) => {
     setError(bool);
-    if (bool === true) return localStorage.setItem(`${props.name}_error`, props.error);
-    localStorage.removeItem(`${props.name}_error`);
+    if (bool === true) return localStorage.setItem(`error_${props.name}`, props.error);
+    localStorage.removeItem(`error_${props.name}`);
   };
 
   const validateEmail = (email) => {
@@ -38,16 +45,18 @@ export default function Input(props) {
 
   return (
     <div className="inputComponentWrapper">
-      <div className={error ? 'inputComponent validationError' : 'inputComponent'}>
-        <input
-          name={props.name}
-          type={props.type}
-          placeholder={props.placeholder}
-          onBlur={(e) => validateInput(e.currentTarget.value)}
-          defaultValue={props.value}
-        />
+      <div className="inputWraper">
+        <div className={error ? 'inputComponent validationError' : 'inputComponent'}>
+          <input
+            name={props.name}
+            type={props.type}
+            placeholder={props.placeholder}
+            onBlur={(e) => validateInput(e.currentTarget.value)}
+            defaultValue={props.value}
+          />
+        </div>
+        <p className={error ? 'showParagraphError' : ''}>{props.error}</p>
       </div>
-      <p className={error ? 'showParagraphError' : ''}>{props.error}</p>
     </div>
   );
 }

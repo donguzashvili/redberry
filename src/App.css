@@ -7,6 +7,7 @@
   --white: #ffffff;
   --borderColor: #525557;
   --infoBg: #454545;
+  --backgroundShadow: rgba(0, 0, 0, 0.3);
 }
 body {
   height: 100vh;
