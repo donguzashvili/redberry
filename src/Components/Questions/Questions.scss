@@ -35,6 +35,17 @@
     }
   }
   .form {
+    h3 {
+      color: var(--red);
+      font-family: 'Rowdies';
+      font-style: normal;
+      font-weight: normal;
+      font-size: 64px;
+      line-height: 79px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+    }
     .inputComponentWrapper {
       margin: 37px 0;
       .validationError {

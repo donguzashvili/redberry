@@ -5,21 +5,27 @@ export default function Input(props) {
 
   const validateInput = (value) => {
     switch (props.name) {
-      case 'name':
-        if (value.length < 2) setError(true);
-        else setError(false);
+      case 'first_name':
+        if (value.length >= 2) return handleError(false);
+        handleError(true);
         break;
-      case 'surname':
-        if (value.length < 2) setError(true);
-        else setError(false);
+      case 'last_name':
+        if (value.length >= 2) return handleError(false);
+        handleError(true);
         break;
-      case 'mail':
-        if (!validateEmail(value)) setError(true);
-        else setError(false);
+      case 'email':
+        if (validateEmail(value)) return handleError(false);
+        handleError(true);
         break;
       default:
         return;
     }
+  };
+
+  const handleError = (bool) => {
+    setError(bool);
+    if (bool === true) return localStorage.setItem(`${props.name}_error`, props.error);
+    localStorage.removeItem(`${props.name}_error`);
   };
 
   const validateEmail = (email) => {
