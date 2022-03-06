@@ -1,0 +1,29 @@
+.errorWrapper {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: var(--backgroundShadow);
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.errorContent {
+  background-color: var(--white);
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+}
+.errorContent svg {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  color: var(--red);
+  cursor: pointer;
+}
+.errorContent h5 {
+  /* color: var(--red); */
+  font-family: 'montserrat';
+  font-size: 16px;
+}

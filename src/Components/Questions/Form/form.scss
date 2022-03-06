@@ -1,0 +1,48 @@
+.form {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  .formWrapper {
+    padding: 195px 118px 279px;
+    .DynamicForm {
+      margin: 0 0 175px;
+      position: relative;
+      .fieldsWrapper {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        padding: 0 125px;
+
+        .skillBtnWrapper {
+          display: flex;
+          justify-content: flex-end;
+          margin-bottom: 63px;
+          .addSkill {
+            background-color: var(--red);
+            color: var(--white);
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 15px;
+            display: flex;
+            border: none;
+            padding: 8.5px 12px;
+            cursor: pointer;
+          }
+        }
+      }
+
+      h3 {
+        color: var(--red);
+        font-family: 'Rowdies';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 64px;
+        line-height: 79px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+      }
+    }
+  }
+}

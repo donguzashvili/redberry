@@ -1,0 +1,29 @@
+[
+  {
+    "key": "work_preference",
+    "question": "how would you prefer to work?",
+    "options": [
+      { "key": "from_office", "value": "From Sairme Office" },
+      { "key": "from_home", "value": "From Home" },
+      { "key": "hybrid", "value": "Hybrid", "defaultChecked": true }
+    ]
+  },
+  {
+    "key": "had_covid",
+    "question": "Did you contact covid 19? :(",
+    "options": [
+      { "key": true, "value": "Yes" },
+      { "key": false, "value": "No", "defaultChecked": true }
+    ]
+  },
+  { "key": "had_covid_at", "question": "when?", "related": "had_covid" },
+  {
+    "key": "vaccinated",
+    "question": "Have you been vaccinated?",
+    "options": [
+      { "key": true, "value": "Yes" },
+      { "key": false, "value": "No", "defaultChecked": true }
+    ]
+  },
+  { "key": "vaccinated_at", "question": "When did you get your last covid vaccine?", "related": "vaccinated" }
+]
