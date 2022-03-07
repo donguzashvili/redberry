@@ -4,7 +4,7 @@ import Input from '../Inputs/Input';
 import ChosenSkills from '../Inputs/ChosenSkills';
 import Select from '../Selects/Select';
 
-import URL from '../URL';
+import { url, token } from '../GlobalVariables';
 
 export default class Skills extends React.Component {
   constructor(props) {
@@ -32,10 +32,10 @@ export default class Skills extends React.Component {
 
   fetchData = async () => {
     try {
-      const Url = `${URL()}/skills`;
+      const Url = `${url}/skills`;
 
       const headers = new Headers();
-      headers.append('token', '9477e157-afab-4463-b1f8-8381adbdf934');
+      headers.append('token', `${token}`);
 
       const reqOptions = {
         method: 'GET',

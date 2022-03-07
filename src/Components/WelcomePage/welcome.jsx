@@ -7,19 +7,14 @@ import './welcome.css';
 export default function WelcomePage(props) {
   const navigate = useNavigate();
 
-  const startQuestions = () => {
-    navigate('/questions/1');
-    // props.startQuestionnaire();
-  };
-
   return (
     <div className="welcome">
       <div className="welcomeWrapper">
         <div className="welcomeContent">
           <h1>Welcome Rocketeer !</h1>
 
-          <button onClick={startQuestions}>Start Questionnaire</button>
-          <p onClick={props.previousApplications}>Submitted Applications</p>
+          <button onClick={() => navigate('/questions/1')}>Start Questionnaire</button>
+          <p onClick={() => navigate('/applications')}>Submitted Applications</p>
 
           <RocketMan />
         </div>

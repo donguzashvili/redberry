@@ -20,6 +20,7 @@
         align-items: center;
         justify-content: center;
         color: var(--red);
+        margin: 0 0 64px;
       }
       p {
         font-family: 'Montserrat';
@@ -27,10 +28,10 @@
         font-weight: normal;
         font-size: 24px;
         line-height: 200%;
-        color: var(--white);
         display: flex;
         align-items: center;
         letter-spacing: 0.05em;
+        color: var(--white);
       }
     }
   }

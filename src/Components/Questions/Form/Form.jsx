@@ -5,7 +5,10 @@ import Pagination from './pagination';
 import BasicInfo from './basicInfo';
 import Skills from './skillsInfo';
 import CovidStuff from './covidStuff';
+import AboutUser from './aboutUser';
 import Error from '../../Error/error';
+
+import { validateEmail } from '../GlobalVariables';
 
 import './form.css';
 
@@ -18,7 +21,6 @@ export default function Form(props) {
   useEffect(() => {
     for (const key in data) {
       if (data[key]) {
-        console.log(data[key]);
         if (typeof data[key] !== 'string') return localStorage.setItem(key, JSON.stringify(data[key]));
         localStorage.setItem(key, data[key]);
       }
@@ -29,7 +31,7 @@ export default function Form(props) {
   const navigate = useNavigate();
 
   const changePage = async (operator) => {
-    const maxPageNumbers = 4;
+    const maxPageNumbers = 5;
     const minPageNumbers = 1;
 
     switch (operator) {
@@ -53,14 +55,22 @@ export default function Form(props) {
 
   const checkForValidation = () => {
     setValidate(!validate);
-    const errorKeys = Object.keys(localStorage);
-    //if at least one error in local storage you shall not pass
-    let result = errorKeys.some((el) => (el.match(/^error/g) ? false : true));
-
-    if (page * 1 === 1) return result;
-    if (page * 1 === 2) return CheckSkills();
+    if (page * 1 === 1) return checkBasicInfo();
+    if (page * 1 === 2) return checkSkills();
     if (page * 1 === 3) return checkCovidValidation();
+    if (page * 1 === 4) return checkAboutUser();
     return false;
+  };
+
+  const checkBasicInfo = () => {
+    const name = localStorage.getItem('first_name');
+    const surname = localStorage.getItem('last_name');
+    const mail = localStorage.getItem('email');
+    if (!name || !surname || !mail) return false;
+    if (name.length <= 2) return false;
+    if (surname.length <= 2) return false;
+    if (!validateEmail(mail)) return false;
+    return true;
   };
 
   const deleteLocalStorage = () => {
@@ -82,15 +92,15 @@ export default function Form(props) {
     return tempObj;
   };
 
-  const CheckSkills = () => {
+  const checkSkills = () => {
     const skills = localStorage.getItem('skills') ? JSON.parse(localStorage.getItem('skills')) : [];
     if (!skills) {
-      setError('აუცილებელია მინიმუმ 1 ენის არჩევა!');
+      setError('Please choose at least one language!');
       return false;
     }
     if (skills.length > 0) return true;
     else {
-      setError('აუცილებელია მინიმუმ 1 ენის არჩევა!');
+      setError('Please choose at least one language!');
       return false;
     }
   };
@@ -103,17 +113,27 @@ export default function Form(props) {
     const vacinationDate = localStorage.getItem('vaccinated_at');
 
     if (!workPreference || !hadCovid || !vaccinated) {
-      setError('აუცილებელია ყველა კითხვას უპსაუხოთ!');
+      setError('Please answer all questions!');
       return false;
     }
     if (hadCovid === 'true' && !covidDate) {
-      setError('აუცილებელია მიუთითოთ კოვიდის თარიღი!');
+      setError('Please input when you had covid(date)!');
       return false;
     }
     if (vaccinated === 'true' && !vacinationDate) {
-      setError('აუცილებელია მიუთითოთ ვაქცინაციის თარიღი!');
+      setError('Please input when you vaccinated(date)!');
       return false;
     }
+    return true;
+  };
+
+  const checkAboutUser = () => {
+    const devTalk = localStorage.getItem('will_organize_devtalk');
+    const devTopic = localStorage.getItem('devtalk_topic');
+    const somethingSpecial = localStorage.getItem('something_special');
+    if (!devTalk) return setError('Please choose one option!');
+    if (devTalk === 'true' && !devTopic) return setError('Please fill devtalk topic!');
+    if (!somethingSpecial) return setError('Please fill tell us something special!');
     return true;
   };
 
@@ -122,12 +142,7 @@ export default function Form(props) {
     const newData = getValues(e.target.elements);
     setData({ ...data, ...newData });
     changePage(operator);
-    // console.log(e.target[0].value);
-    // console.log(e.target.elements);
-    // console.log(e.target.length);
   };
-
-  console.log(error);
 
   return (
     <form onSubmit={(e) => submitForm(e)} className="form">
@@ -135,6 +150,7 @@ export default function Form(props) {
         {page * 1 === 1 ? <BasicInfo validate={validate} /> : null}
         {page * 1 === 2 ? <Skills sendError={setError} validate={validate} /> : null}
         {page * 1 === 3 ? <CovidStuff /> : null}
+        {page * 1 === 4 ? <AboutUser /> : null}
         <Pagination changePage={(op) => setOperator(op)} />
       </div>
       {error ? <Error message={error} closeWindow={() => setError(null)} /> : null}
