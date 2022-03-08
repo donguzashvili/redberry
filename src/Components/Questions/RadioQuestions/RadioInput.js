@@ -1,4 +1,7 @@
-const label = (props) => {
+const Label = (props) => {
+  const defaultChecked =
+    `${props.defaultChecked}` === `${props.text.key}` || localStorage.getItem(props.name) === `${props.text.key}`;
+
   return (
     <label>
       <input
@@ -9,11 +12,12 @@ const label = (props) => {
           props.change();
           localStorage.setItem(`${props.name}`, props.text.key);
         }}
-        defaultChecked={localStorage.getItem(props.name) === `${props.text.key}`}
+        defaultChecked={defaultChecked}
+        disabled={Boolean(props.disabled)}
       />
       <p>{props.text.value}</p>
     </label>
   );
 };
 
-export default label;
+export default Label;

@@ -1,5 +1,5 @@
 export const url = 'https://bootcamp-2022.devtest.ge/api';
-export const token = '9477e157-afab-4463-b1f8-8381adbdf934';
+export const token = '0d5bba58-796c-453b-a649-55d5813745ba';
 
 export const validateEmail = (email) => {
   return String(email)

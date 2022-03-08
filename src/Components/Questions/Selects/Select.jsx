@@ -11,7 +11,7 @@ export default function Select(props) {
     //if user chooses skill this will close container && will store in parents Ref
     setOptionsContainer(false);
     props.value(chosenVal);
-  }, [chosenVal]);
+  }, [chosenVal, props]);
 
   return (
     <div className="select">

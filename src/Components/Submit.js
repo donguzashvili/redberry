@@ -1,6 +1,6 @@
 import { token, url } from './Questions/GlobalVariables';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import './Submit.css';
 
@@ -20,45 +20,43 @@ const Submit = () => {
       } else {
         tempObj[el] = localStorage.getItem(el);
       }
+      localStorage.removeItem(el);
     });
     setData(tempObj);
   };
+
+  const sendData = useCallback(async () => {
+    try {
+      const Url = `${url}/application`;
+
+      const headers = new Headers();
+      headers.append('token', token);
+      headers.append('Accept', 'application/json');
+      headers.append('Content-Type', 'application/json');
+
+      const reqOptions = {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(data),
+      };
+
+      const res = await fetch(Url, reqOptions);
+      const response = await res.json();
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  }, [data]);
 
   useEffect(() => {
     if (!data) return;
     sendData();
     setFinish(true);
-  }, [data]);
+  }, [data, sendData]);
 
   useEffect(() => {
     if (finish) setTimeout(() => navigate('/'), 1000);
-  }, [finish]);
-
-  console.log(url);
-
-  const sendData = async () => {
-    // try {
-    const Url = `${url}/application`;
-
-    const headers = new Headers();
-    headers.append('token', token);
-    headers.append('Accept', 'application/json');
-    headers.append('Content-Type', 'application/json');
-
-    const reqOptions = {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify(data),
-      // mode: 'no-cors',
-    };
-
-    const res = await fetch(Url, reqOptions);
-    const response = await res.json();
-    console.log(response);
-    // } catch (err) {
-    //   console.log(err);
-    // }
-  };
+  }, [finish, navigate]);
 
   return (
     <div className="submitPage">

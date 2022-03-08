@@ -6,6 +6,7 @@ import './DatePicker.css';
 
 export default function DatePicker(props) {
   const [inputType, setInputType] = useState('text');
+  const localStorageVal = localStorage.getItem(props.name) ? localStorage.getItem(props.name) : '';
 
   const updateValue = (e) => {
     setInputType('text');
@@ -23,14 +24,14 @@ export default function DatePicker(props) {
                 name={props.name}
                 type={inputType}
                 placeholder={props.placeholder}
+                defaultValue={props.defaultValue ? props.defaultValue : localStorageVal}
+                disabled={props.defaultValue}
                 onFocus={() => {
                   setInputType('date');
                 }}
                 onBlur={(e) => {
                   updateValue(e);
                 }}
-                //   onBlur={(e) => validateInput(e.currentTarget.value)}
-                // defaultValue={props.value}
               />
               <Calendar onClick={() => setInputType('date')} />
             </label>

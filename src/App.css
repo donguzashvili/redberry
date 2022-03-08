@@ -3,7 +3,6 @@
   --black: #000000;
   --red: #fe3b1f;
   --redHover: rgba(254, 61, 32, 0.7);
-  --h1FontSize: 96px;
   --white: #ffffff;
   --borderColor: #525557;
   --infoBg: #454545;
@@ -26,7 +25,6 @@ body {
 .App {
   height: 100%;
   width: 100%;
-  overflow: auto;
 }
 
 ::-webkit-scrollbar-thumb {

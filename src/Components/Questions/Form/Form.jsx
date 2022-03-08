@@ -12,7 +12,7 @@ import { validateEmail } from '../GlobalVariables';
 
 import './form.css';
 
-export default function Form(props) {
+export default function Form() {
   const [validate, setValidate] = useState(false);
   const [data, setData] = useState({});
   const [operator, setOperator] = useState(null);
@@ -37,9 +37,8 @@ export default function Form(props) {
     switch (operator) {
       case '+':
         if (page * 1 >= maxPageNumbers) return null;
-        // console.log(await checkForValidation());
         if (!checkForValidation()) return null;
-        else navigate(`/questions/${page * 1 + 1}`);
+        navigate(`/questions/${page * 1 + 1}`);
         break;
       case '-':
         if (page * 1 <= minPageNumbers) return;
@@ -48,9 +47,17 @@ export default function Form(props) {
         break;
       default:
         if (operator + 1 > page * 1 && !checkForValidation()) return null;
-        else navigate(`/questions/${operator + 1}`);
+        //if user filled everything and is trying to change page not greater then one then give permission (to avoid skipping pages)
+        if (!checkForValidation() || operator + 1 > sessionStorage.getItem('done') * 1 + 1) return null;
+        navigate(`/questions/${operator + 1}`);
         break;
     }
+  };
+
+  const donePages = () => {
+    const sessionDone = sessionStorage.getItem('done') ? sessionStorage.getItem('done') : 0;
+    if (sessionDone >= page) return;
+    sessionStorage.setItem('done', page);
   };
 
   const checkForValidation = () => {
@@ -63,13 +70,15 @@ export default function Form(props) {
   };
 
   const checkBasicInfo = () => {
-    const name = localStorage.getItem('first_name');
-    const surname = localStorage.getItem('last_name');
-    const mail = localStorage.getItem('email');
-    if (!name || !surname || !mail) return false;
-    if (name.length <= 2) return false;
-    if (surname.length <= 2) return false;
-    if (!validateEmail(mail)) return false;
+    const name = document.getElementsByName('first_name')[0];
+    const surname = document.getElementsByName('last_name')[0];
+    const mail = document.getElementsByName('email')[0];
+
+    if (!name.value || !surname.value || !mail.value) return false;
+    if (name.value.length <= 2) return false;
+    if (surname.value.length <= 2) return false;
+    if (!validateEmail(mail.value)) return false;
+    donePages();
     return true;
   };
 
@@ -98,8 +107,10 @@ export default function Form(props) {
       setError('Please choose at least one language!');
       return false;
     }
-    if (skills.length > 0) return true;
-    else {
+    if (skills.length > 0) {
+      donePages();
+      return true;
+    } else {
       setError('Please choose at least one language!');
       return false;
     }
@@ -124,6 +135,7 @@ export default function Form(props) {
       setError('Please input when you vaccinated(date)!');
       return false;
     }
+    donePages();
     return true;
   };
 
@@ -134,6 +146,7 @@ export default function Form(props) {
     if (!devTalk) return setError('Please choose one option!');
     if (devTalk === 'true' && !devTopic) return setError('Please fill devtalk topic!');
     if (!somethingSpecial) return setError('Please fill tell us something special!');
+    donePages();
     return true;
   };
 

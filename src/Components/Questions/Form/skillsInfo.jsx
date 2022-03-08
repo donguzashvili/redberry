@@ -43,6 +43,7 @@ export default class Skills extends React.Component {
       };
       const data = await fetch(Url, reqOptions);
       const skills = await data.json();
+      sessionStorage.setItem('skills', JSON.stringify(skills));
       this.setState({ skills });
     } catch (err) {
       console.log(err);
