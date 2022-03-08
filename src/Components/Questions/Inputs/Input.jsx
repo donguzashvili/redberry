@@ -50,6 +50,15 @@ export default function Input({ name, validate, placeholder, type, err }) {
     validateInput(input);
   }, [validate, name, validateInput]);
 
+  const checkPhoneValidation = (e) => {
+    if (name === 'phone') {
+      const regex = /^[+]9955[0-9]{0,8}/gm;
+      let value = e.currentTarget.value;
+      const match = value.match(regex);
+      if (!match) e.currentTarget.value = '+995';
+    }
+  };
+
   return (
     <div className="inputComponentWrapper">
       <div className="inputWraper">
@@ -60,9 +69,9 @@ export default function Input({ name, validate, placeholder, type, err }) {
             placeholder={placeholder}
             onBlur={(e) => validateInput(e.currentTarget.value)}
             defaultValue={localStorage.getItem(`${name}`) ? localStorage.getItem(`${name}`) : ''}
-            // onInput={(e) => {
-            //   if (!/^+995/.test(e.currentTarget.value)) e.preventDefault();
-            // }}
+            onInput={(e) => {
+              checkPhoneValidation(e);
+            }}
           />
         </div>
         <p className={error ? 'showParagraphError' : ''}>{err}</p>
