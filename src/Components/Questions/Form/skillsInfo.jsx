@@ -21,7 +21,7 @@ export default class Skills extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchData();
+    this.setState({ skills: JSON.parse(sessionStorage.getItem('skills')) });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -29,26 +29,6 @@ export default class Skills extends React.Component {
       localStorage.setItem('skills', JSON.stringify(this.state.userSkills));
     }
   }
-
-  fetchData = async () => {
-    try {
-      const Url = `${url}/skills`;
-
-      const headers = new Headers();
-      headers.append('token', `${token}`);
-
-      const reqOptions = {
-        method: 'GET',
-        headers: headers,
-      };
-      const data = await fetch(Url, reqOptions);
-      const skills = await data.json();
-      sessionStorage.setItem('skills', JSON.stringify(skills));
-      this.setState({ skills });
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   updateSkillList = () => {
     const uniqueSkill = this.state.userSkills.some((el) => el.title === this.selectSkill.title);

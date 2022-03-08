@@ -55,7 +55,11 @@ const Submit = () => {
   }, [data, sendData]);
 
   useEffect(() => {
-    if (finish) setTimeout(() => navigate('/'), 1000);
+    if (finish)
+      setTimeout(() => {
+        sessionStorage.removeItem('done');
+        navigate('/');
+      }, 1000);
   }, [finish, navigate]);
 
   return (
