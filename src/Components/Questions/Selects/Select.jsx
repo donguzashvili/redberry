@@ -18,7 +18,9 @@ export default function Select(props) {
       <div className="selectWrapper">
         <div onClick={() => setOptionsContainer(!optionsContainer)} className="chosenContent">
           <input disabled name={props.name} value={chosenVal.title} type="text" placeholder={props.placeholder} />
-          <Vector />
+          <span className={optionsContainer ? 'toggleArrow' : ''}>
+            <Vector />
+          </span>
         </div>
         <div className={optionsContainer ? 'options openOptions' : 'options'}>
           {props.options

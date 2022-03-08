@@ -56,12 +56,17 @@
       align-items: center;
       width: 455px;
       height: 54px;
-      svg {
+
+      span {
         position: absolute;
-        fill: var(--red);
         right: 10px;
+        transition: all 0.3s ease-in-out;
         cursor: pointer;
+        svg {
+          fill: var(--red);
+        }
       }
+
       input {
         border: none;
         font-family: 'montserrat';
@@ -75,4 +80,8 @@
       }
     }
   }
+}
+
+.toggleArrow {
+  transform: rotate(180deg);
 }

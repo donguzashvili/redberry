@@ -90,8 +90,11 @@
           text-align: left;
           color: var(--white);
         }
-        svg {
-          fill: var(--white);
+        span {
+          transition: all 0.3s ease-in-out;
+          svg {
+            fill: var(--white);
+          }
         }
       }
       section {
