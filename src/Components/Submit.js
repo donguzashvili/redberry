@@ -59,7 +59,7 @@ const Submit = () => {
       setTimeout(() => {
         sessionStorage.removeItem('done');
         navigate('/');
-      }, 1000);
+      }, 3000);
   }, [finish, navigate]);
 
   return (
